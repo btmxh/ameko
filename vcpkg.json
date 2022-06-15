@@ -1,0 +1,23 @@
+{
+  "name": "ameko",
+  "version-semver": "0.1.0",
+  "dependencies": [
+    {
+      "name": "fmt",
+      "version>=": "8.1.1"
+    }
+  ],
+  "default-features": [],
+  "features": {
+    "test": {
+      "description": "Dependencies for testing",
+      "dependencies": [
+        {
+          "name": "catch2",
+          "version>=": "2.13.8"
+        }
+      ]
+    }
+  },
+  "builtin-baseline": "c37cc7836a0e1cfd55747be8ec472eafa8055276"
+}
