@@ -17,7 +17,7 @@ include(cmake/variables.cmake)
 
 add_library(
     ameko_lib OBJECT
-    source/lib.cpp
+    source/ameko/game.cpp
 )
 
 target_include_directories(

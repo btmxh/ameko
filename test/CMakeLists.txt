@@ -11,8 +11,7 @@ include(Catch)
 
 # ---- Tests ----
 
-add_executable(ameko_test 
-    source/ameko_test.cpp
+add_executable(ameko_test
     source/main.cpp
 )
 
