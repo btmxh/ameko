@@ -11,11 +11,15 @@ include(Catch)
 
 # ---- Tests ----
 
-add_executable(ameko_test source/ameko_test.cpp)
+add_executable(ameko_test 
+    source/ameko_test.cpp
+    source/main.cpp
+)
+
 target_link_libraries(
     ameko_test PRIVATE
     ameko_lib
-    Catch2::Catch2WithMain
+    Catch2::Catch2
 )
 target_compile_features(ameko_test PRIVATE cxx_std_17)
 
