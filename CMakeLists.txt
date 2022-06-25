@@ -50,10 +50,7 @@ find_package(tomlplusplus CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(glad CONFIG REQUIRED)
 
-add_library(better_enums INTERFACE)
-target_include_directories(better_enums INTERFACE external/better-enums)
-
-target_link_libraries(ameko_lib PUBLIC fmt::fmt tl::optional glfw tomlplusplus::tomlplusplus spdlog::spdlog glad::glad better_enums)
+target_link_libraries(ameko_lib PUBLIC fmt::fmt tl::optional glfw tomlplusplus::tomlplusplus spdlog::spdlog glad::glad)
 target_compile_definitions(ameko_lib PUBLIC GLFW_INCLUDE_NONE)
 
 # ---- Declare executable ----
