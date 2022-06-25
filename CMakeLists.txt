@@ -18,6 +18,21 @@ include(cmake/variables.cmake)
 add_library(
     ameko_lib OBJECT
     source/ameko/game.cpp
+    source/ameko/config/global_config.cpp
+    source/ameko/config/serialization/toml_serializer.cpp
+    source/ameko/executor/executor.cpp
+    source/ameko/executor/threads/thread.cpp
+    source/ameko/executor/loops/event_loop.cpp
+    source/ameko/executor/loops/update_loop.cpp
+    source/ameko/executor/loops/render_loop.cpp
+    source/ameko/executor/loops/audio_loop.cpp
+    source/ameko/executor/sync/of_sync.cpp
+    source/ameko/display/display.cpp
+    source/ameko/display/backends/glfw/glfw_context.cpp
+    source/ameko/display/backends/glfw/glfw_display.cpp
+    source/ameko/input/backends/glfw/glfw_input_context.cpp
+    source/ameko/graphics/backends/gl/gl_context.cpp
+    source/ameko/logging/log.cpp
 )
 
 target_include_directories(
@@ -28,8 +43,18 @@ target_include_directories(
 
 target_compile_features(ameko_lib PUBLIC cxx_std_17)
 
-find_package(fmt REQUIRED)
-target_link_libraries(ameko_lib PRIVATE fmt::fmt)
+find_package(fmt CONFIG REQUIRED)
+find_package(tl-optional CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
+find_package(tomlplusplus CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+find_package(glad CONFIG REQUIRED)
+
+add_library(better_enums INTERFACE)
+target_include_directories(better_enums INTERFACE external/better-enums)
+
+target_link_libraries(ameko_lib PUBLIC fmt::fmt tl::optional glfw tomlplusplus::tomlplusplus spdlog::spdlog glad::glad better_enums)
+target_compile_definitions(ameko_lib PUBLIC GLFW_INCLUDE_NONE)
 
 # ---- Declare executable ----
 

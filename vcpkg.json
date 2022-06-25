@@ -2,10 +2,17 @@
   "name": "ameko",
   "version-semver": "0.1.0",
   "dependencies": [
+    "fmt",
+    "glfw3",
     {
-      "name": "fmt",
-      "version>=": "8.1.1"
-    }
+      "name": "glad",
+      "features": ["gl-api-46", "extensions"]
+    },
+    "openal-soft",
+    "stb",
+    "tl-optional",
+    "tomlplusplus",
+    "spdlog"
   ],
   "default-features": [],
   "features": {

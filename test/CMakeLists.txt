@@ -12,6 +12,7 @@ include(Catch)
 # ---- Tests ----
 
 add_executable(ameko_test
+    source/config/toml.cpp
     source/main.cpp
 )
 
