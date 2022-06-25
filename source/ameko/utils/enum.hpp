@@ -63,9 +63,9 @@ constexpr auto enum_map_to_string(const enum_map_t<T, NumValues>& map, T value)
     { \
       return ::ameko::enum_map_from_string(enum_map, string); \
     } \
-    static constexpr auto to_string(T value) -> std::string_view \
+    static constexpr auto to_string(T enum_value) -> std::string_view \
     { \
-      return ::ameko::enum_map_to_string(enum_map, value); \
+      return ::ameko::enum_map_to_string(enum_map, enum_value); \
     } \
   }
 // NOLINTEND(*-macro-usage, *-macro-parentheses)
