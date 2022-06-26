@@ -62,7 +62,7 @@ static auto serialize_value_to_toml_value(
   if (serialize_value.is_number()) {
     auto value = serialize_value.get_number();
     // this will make toml++ format integers without ".0"
-    if (std::trunc(value) == value
+    if (std::abs(std::trunc(value) - value) < 1e-10
         && value < static_cast<double>(std::numeric_limits<int64_t>::max())
         && value > static_cast<double>(std::numeric_limits<int64_t>::min()))
     {

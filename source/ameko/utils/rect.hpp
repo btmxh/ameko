@@ -13,9 +13,9 @@ struct offset2
 
   constexpr offset2() = default;
 
-  constexpr offset2(T x, T y)
-      : x(x)
-      , y(y)
+  constexpr offset2(T a_x, T a_y)
+      : x(a_x)
+      , y(a_y)
   {
   }
 
@@ -33,9 +33,9 @@ struct extent2
 
   constexpr extent2() = default;
 
-  constexpr extent2(T width, T height)
-      : width(width)
-      , height(height)
+  constexpr extent2(T a_width, T a_height)
+      : width(a_width)
+      , height(a_height)
   {
   }
 
@@ -55,20 +55,20 @@ struct rect
 
   constexpr rect() = default;
 
-  constexpr rect(const offset2<T>& offset, const extent2<T>& extent)
-      : offset(offset)
-      , extent(extent)
+  constexpr rect(const offset2<T>& a_offset, const extent2<T>& a_extent)
+      : offset(a_offset)
+      , extent(a_extent)
   {
   }
 
-  constexpr rect(T x, T y, const extent2<T>& extent)
+  constexpr rect(T x, T y, const extent2<T>& a_extent)
       : offset(x, y)
-      , extent(extent)
+      , extent(a_extent)
   {
   }
 
-  constexpr rect(const offset2<T>& offset, T width, T height)
-      : offset(offset)
+  constexpr rect(const offset2<T>& a_offset, T width, T height)
+      : offset(a_offset)
       , extent(width, height)
   {
   }
