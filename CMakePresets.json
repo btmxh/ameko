@@ -55,6 +55,7 @@
     {
       "name": "ci-headless",
       "description": "Disable default features for headless execution and testing",
+      "hidden": true,
       "cacheVariables": {
         "VCPKG_MANIFEST_NO_DEFAULT_FEATURES": "ON"
       }
