@@ -21,6 +21,8 @@ dummy_display::dummy_display([[maybe_unused]] display_config& display_config,
   }
 }
 
+dummy_display::~dummy_display() = default;
+
 auto dummy_display::set_visible([[maybe_unused]] bool visible) -> void {}
 auto dummy_display::poll_events(bool block) -> void
 {

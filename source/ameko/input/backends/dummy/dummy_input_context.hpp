@@ -8,7 +8,7 @@ class dummy_input_context : public input_context
 {
 public:
   dummy_input_context() = default;
-  virtual ~dummy_input_context() = default;
+  ~dummy_input_context() = default;
 
   auto set_key_callback(key_callback callback) -> void;
   auto set_mouse_button_callback(mouse_button_callback callback) -> void;

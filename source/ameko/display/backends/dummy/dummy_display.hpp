@@ -15,7 +15,7 @@ class dummy_display : public display
 public:
   dummy_display(display_config& display_config,
                 graphics_config& graphics_config);
-  virtual ~dummy_display() = default;
+  ~dummy_display();
 
   dummy_display(const dummy_display&) = delete;
   dummy_display(dummy_display&&) = delete;
