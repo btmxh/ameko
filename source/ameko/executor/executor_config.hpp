@@ -2,8 +2,8 @@
 
 #include <algorithm>
 #include <array>
-#include <vector>
 #include <cmath>
+#include <vector>
 
 #include "../config/serialization/serialization_context.hpp"
 #include "../utils/optional.hpp"
@@ -22,7 +22,8 @@ struct executor_loop_config
     context(AMEKO_SERIALIZATION_NVP(thread_id));
 
     if constexpr (remove_cvref_t<decltype(context)>::is_save) {
-      if (!relative_frequency.has_value() || std::abs(relative_frequency.value() - 1.0) < 1e-10)
+      if (!relative_frequency.has_value()
+          || std::abs(relative_frequency.value() - 1.0) < 1e-10)
       {
         return;
       }
