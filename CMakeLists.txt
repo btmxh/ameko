@@ -80,6 +80,10 @@ if(glad_FOUND)
   target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_GLAD)
 endif()
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  target_link_libraries(ameko_lib "stdc++fs")
+endif()
+
 # ---- Declare executable ----
 
 add_executable(ameko_exe source/main.cpp)
