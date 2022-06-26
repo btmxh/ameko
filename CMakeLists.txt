@@ -81,7 +81,7 @@ if(glad_FOUND)
 endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  target_link_libraries(ameko_lib "stdc++fs")
+  target_link_libraries(ameko_lib PUBLIC "stdc++fs")
 endif()
 
 # ---- Declare executable ----
