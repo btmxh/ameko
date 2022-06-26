@@ -5,6 +5,7 @@
 #include <cstdint>
 
 #include "../utils/optional.hpp"
+#include "executor_mode.hpp"
 #include "loops/audio_loop.hpp"
 #include "loops/event_loop.hpp"
 #include "loops/loop.hpp"
@@ -12,7 +13,6 @@
 #include "loops/update_loop.hpp"
 #include "sync/sync.hpp"
 #include "threads/thread.hpp"
-#include "executor_mode.hpp"
 
 namespace ameko
 {

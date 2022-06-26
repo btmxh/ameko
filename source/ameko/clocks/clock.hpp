@@ -2,7 +2,8 @@
 
 namespace ameko
 {
-class clock {
+class clock
+{
 public:
   clock() = default;
   virtual ~clock() = default;
@@ -14,4 +15,4 @@ public:
 
   virtual auto get_time() -> double = 0;
 };
-} // namespace ameko
+}  // namespace ameko

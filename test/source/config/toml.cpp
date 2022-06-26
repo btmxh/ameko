@@ -15,9 +15,12 @@ TEST_CASE("TOML config parsing", "[config]")
   SECTION("serialize")
   {
     auto obj = std::make_unique<ameko::config_object>();
-    obj->emplace("a", ameko::config_value(static_cast<ameko::config_number>(2)));
-    obj->emplace("b", ameko::config_value(static_cast<ameko::config_number>(32)));
-    obj->emplace("c", ameko::config_value(static_cast<ameko::config_number>(4)));
+    obj->emplace("a",
+                 ameko::config_value(static_cast<ameko::config_number>(2)));
+    obj->emplace("b",
+                 ameko::config_value(static_cast<ameko::config_number>(32)));
+    obj->emplace("c",
+                 ameko::config_value(static_cast<ameko::config_number>(4)));
     own_value value = std::make_unique<ameko::config_value>(std::move(obj));
     std::stringstream str_stream;
     serializer->serialize(*value, str_stream, "<unknown>");

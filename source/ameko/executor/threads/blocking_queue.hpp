@@ -30,7 +30,8 @@ public:
     return ret;
   }
 
-  auto empty() -> bool {
+  auto empty() -> bool
+  {
     std::unique_lock lock(m_mutex);
     return m_queue.empty();
   }

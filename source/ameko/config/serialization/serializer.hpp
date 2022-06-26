@@ -3,12 +3,15 @@
 #include <iosfwd>
 #include <string_view>
 
-#include "serialize_value.hpp"
 #include "../../utils/enum.hpp"
+#include "serialize_value.hpp"
 
 namespace ameko
 {
-enum class serialize_format { toml };
+enum class serialize_format
+{
+  toml
+};
 
 class serializer
 {
