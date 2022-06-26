@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <vector>
+#include <cmath>
 
 #include "../config/serialization/serialization_context.hpp"
 #include "../utils/optional.hpp"
@@ -20,8 +21,8 @@ struct executor_loop_config
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
     context(AMEKO_SERIALIZATION_NVP(thread_id));
 
-    if constexpr (context.is_save) {
-      if (!relative_frequency.has_value() || relative_frequency.value() == 1.0)
+    if constexpr (remove_cvref_t<decltype(context)>::is_save) {
+      if (!relative_frequency.has_value() || std::abs(relative_frequency.value() - 1.0) < 1e-10)
       {
         return;
       }
@@ -51,7 +52,7 @@ struct executor_mode_config
     context(AMEKO_SERIALIZATION_NVP(audio));
 
     std::vector<double> thread_frequencies;
-    if constexpr (context.is_save) {
+    if constexpr (remove_cvref_t<decltype(context)>::is_save) {
       thread_frequencies.resize(4);
       std::copy(executor_thread_frequencies.begin(),
                 executor_thread_frequencies.end(),
@@ -60,7 +61,7 @@ struct executor_mode_config
 
     context(AMEKO_SERIALIZATION_NVP(thread_frequencies));
 
-    if constexpr (context.is_load) {
+    if constexpr (remove_cvref_t<decltype(context)>::is_load) {
       for (size_t i = 0; i < executor_thread_frequencies.size(); ++i) {
         executor_thread_frequencies[i] =
             i >= thread_frequencies.size() ? 0.0 : thread_frequencies[i];

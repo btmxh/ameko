@@ -3,6 +3,7 @@
 #include <atomic>
 #include <functional>
 #include <memory>
+#include <thread>
 
 #include "../sync/sync.hpp"
 #include "blocking_queue.hpp"

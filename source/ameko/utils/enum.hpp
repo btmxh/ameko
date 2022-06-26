@@ -52,20 +52,21 @@ constexpr auto enum_map_to_string(const enum_map_t<T, NumValues>& map, T value)
 // NOLINTBEGIN(*-macro-usage, *-macro-parentheses)
 #define AMEKO_ENUM_NVP(T, value) std::pair<const char*, T>(#value, T::value)
 
+// this must be in the ameko namespace, no nested namespaces allowed
 #define AMEKO_GENERATE_ENUM_STRING_CONVERTER(T, ...) \
   template<> \
-  struct ::ameko::enum_string_converter<T> : public true_type \
+  struct enum_string_converter<T> : public true_type \
   { \
     static constexpr size_t num_enum_values = \
         std::tuple_size_v<decltype(std::make_tuple(__VA_ARGS__))>; \
     static constexpr enum_map_t<T, num_enum_values> enum_map = {__VA_ARGS__}; \
     static constexpr auto from_string(std::string_view string) -> T \
     { \
-      return ::ameko::enum_map_from_string(enum_map, string); \
+      return enum_map_from_string(enum_map, string); \
     } \
     static constexpr auto to_string(T enum_value) -> std::string_view \
     { \
-      return ::ameko::enum_map_to_string(enum_map, enum_value); \
+      return enum_map_to_string(enum_map, enum_value); \
     } \
   }
 // NOLINTEND(*-macro-usage, *-macro-parentheses)

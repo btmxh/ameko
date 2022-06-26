@@ -129,7 +129,8 @@
       "inherits": [
         "ci-unix",
         "dev-mode",
-        "vcpkg"
+        "vcpkg",
+        "ci-headless"
       ],
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Sanitize",
