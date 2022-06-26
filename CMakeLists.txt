@@ -15,25 +15,47 @@ include(cmake/variables.cmake)
 
 # ---- Declare library ----
 
-add_library(
-    ameko_lib OBJECT
-    source/ameko/game.cpp
-    source/ameko/config/global_config.cpp
-    source/ameko/config/serialization/toml_serializer.cpp
-    source/ameko/executor/executor.cpp
-    source/ameko/executor/threads/thread.cpp
-    source/ameko/executor/loops/event_loop.cpp
-    source/ameko/executor/loops/update_loop.cpp
-    source/ameko/executor/loops/render_loop.cpp
-    source/ameko/executor/loops/audio_loop.cpp
-    source/ameko/executor/sync/of_sync.cpp
-    source/ameko/display/display.cpp
+set(AMEKO_SOURCES
+  source/ameko/game.cpp
+  source/ameko/config/global_config.cpp
+  source/ameko/config/serialization/toml_serializer.cpp
+  source/ameko/executor/executor.cpp
+  source/ameko/executor/threads/thread.cpp
+  source/ameko/executor/loops/event_loop.cpp
+  source/ameko/executor/loops/update_loop.cpp
+  source/ameko/executor/loops/render_loop.cpp
+  source/ameko/executor/loops/audio_loop.cpp
+  source/ameko/executor/sync/of_sync.cpp
+  source/ameko/display/display.cpp
+  source/ameko/display/backends/dummy/dummy_display.cpp
+  source/ameko/graphics/backends/dummy/dummy_graphics_context.cpp
+  source/ameko/input/backends/dummy/dummy_input_context.cpp
+  source/ameko/logging/log.cpp
+)
+
+find_package(fmt CONFIG REQUIRED)
+find_package(tl-optional CONFIG REQUIRED)
+find_package(tomlplusplus CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+
+find_package(glfw3 CONFIG)
+if(glfw3_FOUND)
+  list(APPEND AMEKO_SOURCES
     source/ameko/display/backends/glfw/glfw_context.cpp
     source/ameko/display/backends/glfw/glfw_display.cpp
+    source/ameko/display/backends/glfw/glfw_display_internal.cpp
     source/ameko/input/backends/glfw/glfw_input_context.cpp
+  )
+endif()
+
+find_package(glad CONFIG)
+if(glad_FOUND)
+  list(APPEND AMEKO_SOURCES
     source/ameko/graphics/backends/gl/gl_context.cpp
-    source/ameko/logging/log.cpp
-)
+  )
+endif()
+
+add_library(ameko_lib OBJECT ${AMEKO_SOURCES})
 
 target_include_directories(
     ameko_lib ${warning_guard}
@@ -43,15 +65,20 @@ target_include_directories(
 
 target_compile_features(ameko_lib PUBLIC cxx_std_17)
 
-find_package(fmt CONFIG REQUIRED)
-find_package(tl-optional CONFIG REQUIRED)
-find_package(glfw3 CONFIG REQUIRED)
-find_package(tomlplusplus CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-find_package(glad CONFIG REQUIRED)
+target_link_libraries(ameko_lib PUBLIC fmt::fmt tl::optional tomlplusplus::tomlplusplus spdlog::spdlog)
 
-target_link_libraries(ameko_lib PUBLIC fmt::fmt tl::optional glfw tomlplusplus::tomlplusplus spdlog::spdlog glad::glad)
-target_compile_definitions(ameko_lib PUBLIC GLFW_INCLUDE_NONE)
+if(glfw3_FOUND)
+  target_link_libraries(ameko_lib PUBLIC glfw)
+  target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_GLFW)
+  target_compile_definitions(ameko_lib PUBLIC GLFW_INCLUDE_NONE)
+endif()
+
+if(glad_FOUND)
+  target_link_libraries(ameko_lib PUBLIC glad::glad)
+  target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_OPENGL)
+  target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_OPENGL_ES)
+  target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_GLAD)
+endif()
 
 # ---- Declare executable ----
 

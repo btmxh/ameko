@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../../../dependencies/glfw.hpp"
 #include "../../input_context.hpp"
 
 namespace ameko
 {
-class glfw_input_context : public input_context
+class dummy_input_context : public input_context
 {
 public:
-  glfw_input_context(GLFWwindow* window);
-  ~glfw_input_context();
+  dummy_input_context() = default;
+  virtual ~dummy_input_context() = default;
 
   auto set_key_callback(key_callback callback) -> void;
   auto set_mouse_button_callback(mouse_button_callback callback) -> void;
@@ -21,10 +20,8 @@ public:
   auto is_middle_mouse_button(mouse_button_code button) -> bool;
 
 private:
-  GLFWwindow* m_window;
   key_callback m_key_callback;
   mouse_button_callback m_mouse_button_callback;
   cursor_pos_callback m_cursor_pos_callback;
-  offset2<int32_t> m_old_cursor_pos;
 };
 }  // namespace ameko

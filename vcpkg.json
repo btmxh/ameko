@@ -1,20 +1,15 @@
 {
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
   "name": "ameko",
   "version-semver": "0.1.0",
   "dependencies": [
     "fmt",
-    "glfw3",
-    {
-      "name": "glad",
-      "features": ["gl-api-46", "extensions"]
-    },
-    "openal-soft",
     "stb",
     "tl-optional",
     "tomlplusplus",
     "spdlog"
   ],
-  "default-features": [],
+  "default-features": ["glfw", "gl", "openal-soft"],
   "features": {
     "test": {
       "description": "Dependencies for testing",
@@ -23,6 +18,31 @@
           "name": "catch2",
           "version>=": "2.13.8"
         }
+      ]
+    },
+    "glfw": {
+      "description": "Using GLFW display backend",
+      "dependencies": [
+        "glfw3"
+      ]
+    },
+    "gl": {
+      "description": "Using OpenGL graphics backend",
+      "dependencies": [
+        {
+          "name": "glad",
+          "features": [
+            "gl-api-46",
+            "gles2-api-latest",
+            "extensions"
+          ]
+        }
+      ]
+    },
+    "openal-soft": {
+      "description": "Using OpenAL Soft audio backend",
+      "dependencies": [
+        "openal-soft"
       ]
     }
   },

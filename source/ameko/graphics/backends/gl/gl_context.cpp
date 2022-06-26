@@ -2,27 +2,52 @@
 
 #include "gl_context.hpp"
 
-#include <glad/glad.h>
+#include "../../../dependencies/glad.hpp"
 
 namespace ameko
 {
-gl_context::gl_context(gl_load_proc load_proc,
-                       gl_make_context_current_proc make_context_current_proc)
-    : m_load_proc(load_proc)
-    , m_make_context_current_proc(std::move(make_context_current_proc))
+class gl_context : public graphics_context
 {
-  if (gladLoadGLLoader(load_proc) == 0) {
-    throw std::runtime_error("unable to initialize OpenGL");
+public:
+  gl_context(bool gl_es,
+             gl_load_proc load_proc,
+             gl_make_context_current_proc make_context_current_proc)
+      : m_make_context_current_proc(std::move(make_context_current_proc))
+  {
+    if (gl_es) {
+      if (gladLoadGLES2Loader(load_proc) == 0) {
+        throw std::runtime_error("unable to initialize OpenGL ES");
+      }
+    } else {
+      if (gladLoadGLLoader(load_proc) == 0) {
+        throw std::runtime_error("unable to initialize OpenGL");
+      }
+    }
   }
-}
 
-auto gl_context::make_current_on_thread(bool current) -> void
-{
-  m_make_context_current_proc(current);
-}
+  ~gl_context() override = default;
 
-auto gl_context::load_gl_proc(const char* name) -> void*
+  gl_context(const gl_context&) = delete;
+  gl_context(gl_context&&) = delete;
+  auto operator=(const gl_context&) = delete;
+  auto operator=(gl_context&&) = delete;
+
+  auto make_current_on_thread(bool current) -> void override
+  {
+    m_make_context_current_proc(current);
+  }
+
+private:
+  gl_make_context_current_proc m_make_context_current_proc;
+};
+
+auto create_opengl_graphics_context(
+    bool gl_es,
+    gl_load_proc load_proc,
+    gl_make_context_current_proc make_context_current_proc)
+    -> std::unique_ptr<graphics_context>
 {
-  return m_load_proc(name);
+  return std::make_unique<gl_context>(
+      gl_es, load_proc, std::move(make_context_current_proc));
 }
 }  // namespace ameko

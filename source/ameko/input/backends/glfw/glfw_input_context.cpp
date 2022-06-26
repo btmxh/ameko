@@ -1,6 +1,6 @@
 #include "glfw_input_context.hpp"
 
-#include "../../../display/backends/glfw/glfw_display.hpp"
+#include "../../../display/backends/glfw/glfw_display_internal.hpp"
 
 namespace ameko
 {

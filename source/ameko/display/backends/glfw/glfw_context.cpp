@@ -2,7 +2,7 @@
 
 #include "glfw_context.hpp"
 
-#include <GLFW/glfw3.h>
+#include "../../../dependencies/glfw.hpp"
 
 namespace ameko
 {
