@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "../config/serialization/serialization_context.hpp"
+#include "../utils/math.hpp"
 #include "../utils/optional.hpp"
 #include "executor_mode.hpp"
 #include "threads/thread.hpp"
@@ -23,7 +24,7 @@ struct executor_loop_config
 
     if constexpr (remove_cvref_t<decltype(context)>::is_save) {
       if (!relative_frequency.has_value()
-          || std::abs(relative_frequency.value() - 1.0) < 1e-10)
+          || float_equals(relative_frequency.value(), 1.0))
       {
         return;
       }
