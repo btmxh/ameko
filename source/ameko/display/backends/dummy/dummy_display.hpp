@@ -22,17 +22,17 @@ public:
   auto operator=(const dummy_display&) = delete;
   auto operator=(dummy_display&&) = delete;
 
-  auto set_visible([[maybe_unused]] bool visible) -> void;
-  auto poll_events([[maybe_unused]] bool block) -> void;
-  auto unblock_poll_events() -> void;
-  auto swap_buffers() -> void;
-  auto set_vsync([[maybe_unused]] bool vsync) -> void;
-  auto close() -> void;
+  auto set_visible([[maybe_unused]] bool visible) -> void override;
+  auto poll_events([[maybe_unused]] bool block) -> void override;
+  auto unblock_poll_events() -> void override;
+  auto swap_buffers() -> void override;
+  auto set_vsync([[maybe_unused]] bool vsync) -> void override;
+  auto close() -> void override;
 
-  auto set_on_close(std::function<void()> callback) -> void;
+  auto set_on_close(std::function<void()> callback) -> void override;
 
-  auto get_input_context() -> input_context&;
-  auto get_graphics_context() -> graphics_context&;
+  auto get_input_context() -> input_context& override;
+  auto get_graphics_context() -> graphics_context& override;
 
 private:
   std::function<void()> m_on_close_callback;
