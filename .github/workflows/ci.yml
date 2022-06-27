@@ -113,7 +113,8 @@ jobs:
 
     - name: Install static analyzers
       if: matrix.os == 'ubuntu-22.04'
-      run: sudo apt-get install clang-tidy cppcheck -y -q
+      run: sudo apt-get install clang-tidy-14 cppcheck -y -q
+        && alias clang-tidy=clang-tidy-14
 
     - name: Install vcpkg
       uses: friendlyanon/setup-vcpkg@v1
