@@ -102,11 +102,14 @@ auto executor::resume() -> void
 
 auto executor::stop() -> void
 {
-  if(!m_running)
+  if (!m_running) {
+    return;
+  }
+
   // this makes sure that:
   // * the opengl context is current on main thread
   // (back to where it started)
-  // * no loops can block indefinitely 
+  // * no loops can block indefinitely
   // (since `single` is true for all these loops)
   set_mode(executor_mode {{main_thread_id, 1.0},
                           {main_thread_id, 1.0},
