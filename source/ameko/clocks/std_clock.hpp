@@ -11,13 +11,13 @@ class std_clock : public clock
 {
 public:
   std_clock()
-      : start_time(get_raw_time())
+      : m_start_time(get_raw_time())
   {
   }
   ~std_clock() override = default;
 
   std_clock(const std_clock&) = default;
-  std_clock(std_clock&&) = default;
+  std_clock(std_clock&&) noexcept = default;
   auto operator=(const std_clock&) -> std_clock& = delete;
   auto operator=(std_clock&&) -> std_clock& = delete;
 
@@ -28,10 +28,10 @@ public:
     return duration.count();
   }
 
-  auto get_time() -> double override { return get_raw_time() - start_time; }
+  auto get_time() -> double override { return get_raw_time() - m_start_time; }
 
 private:
-  double start_time;
+  double m_start_time;
 };
 
 using std_high_res_clock = std_clock<std::chrono::high_resolution_clock>;

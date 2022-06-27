@@ -39,8 +39,8 @@ private:
   executor* m_owner;
   executor_thread_id m_id;
   std::unique_ptr<sync> m_sync;
-  std::atomic_bool m_stopped;
-  std::atomic_bool m_is_idle_mode;
+  std::atomic_bool m_stopped = false;
+  std::atomic_bool m_is_idle_mode = false;
   blocking_queue<work> m_works;
 };
 }  // namespace ameko

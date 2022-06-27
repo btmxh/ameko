@@ -41,6 +41,7 @@ struct is_bitfield_enum<modifier_key_flag> : public true_type
 
 using modifier_key_flags = bitfield<modifier_key_flag>;
 
+// NOLINTBEGIN(*-member-init)
 struct key_event
 {
   key_code key;
@@ -61,4 +62,5 @@ struct cursor_pos_event
   offset2<int32_t> old_pos;
   offset2<int32_t> new_pos;
 };
+// NOLINTEND(*-member-init)
 }  // namespace ameko

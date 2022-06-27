@@ -15,6 +15,6 @@ public:
   auto operator=(const dummy_graphics_context&) = delete;
   auto operator=(dummy_graphics_context&&) = delete;
 
-  auto make_current_on_thread([[maybe_unused]] bool current) -> void;
+  auto make_current_on_thread([[maybe_unused]] bool current) -> void override;
 };
 }  // namespace ameko

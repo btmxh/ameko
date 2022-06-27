@@ -12,7 +12,7 @@ class of_sync : public sync
 {
 public:
   of_sync();
-  of_sync(std::shared_ptr<clock> clock);
+  explicit of_sync(std::shared_ptr<clock> clock);
 
   ~of_sync() override = default;
 

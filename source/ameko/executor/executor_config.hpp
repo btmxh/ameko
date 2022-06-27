@@ -64,8 +64,8 @@ struct executor_mode_config
 
     if constexpr (remove_cvref_t<decltype(context)>::is_load) {
       for (size_t i = 0; i < executor_thread_frequencies.size(); ++i) {
-        executor_thread_frequencies[i] =
-            i >= thread_frequencies.size() ? 0.0 : thread_frequencies[i];
+        executor_thread_frequencies.at(i) =
+            i >= thread_frequencies.size() ? 0.0 : thread_frequencies.at(i);
       }
     }
 
