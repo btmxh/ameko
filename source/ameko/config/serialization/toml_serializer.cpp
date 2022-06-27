@@ -45,9 +45,9 @@ static auto serialize_value_to_toml_value(
     const serialize_value& serialize_value) -> std::unique_ptr<toml::node>
 {
   if (serialize_value.is_array()) {
-    const auto& serialize_array = serialize_value.get_array();
+    const auto& array = serialize_value.get_array();
     auto toml_array = std::make_unique<toml::array>();
-    for (const auto& serialize_array_elem : serialize_array) {
+    for (const auto& serialize_array_elem : array) {
       auto node_ptr = serialize_value_to_toml_value(serialize_array_elem);
       toml_array->push_back(*node_ptr);
     }
@@ -75,9 +75,9 @@ static auto serialize_value_to_toml_value(
   }
 
   if (serialize_value.is_object()) {
-    const auto& serialize_object = serialize_value.get_object();
+    const auto& object = serialize_value.get_object();
     auto toml_object = std::make_unique<toml::table>();
-    for (const auto& [key, value] : serialize_object) {
+    for (const auto& [key, value] : object) {
       auto node_ptr = serialize_value_to_toml_value(value);
       toml_object->insert(key, *node_ptr);
     }

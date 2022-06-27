@@ -19,9 +19,10 @@ auto executor::set_mode(const executor_mode& mode) -> void
 {
   pause();
 
-  auto old_render_thread_id =
-      m_mode.map([](const auto& mode) { return mode.render.thread_id; })
-          .value_or(main_thread_id);
+  auto old_render_thread_id = m_mode
+                                  .map([](const auto& mode_value)
+                                       { return mode_value.render.thread_id; })
+                                  .value_or(main_thread_id);
 
   if (old_render_thread_id != mode.render.thread_id) {
     run_in_thread_and_block(

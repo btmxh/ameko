@@ -20,13 +20,13 @@ struct bitfield
 
   constexpr explicit bitfield() = default;
 
-  constexpr explicit bitfield(base_type value)
-      : value(value)
+  constexpr explicit bitfield(base_type a_value)
+      : value(a_value)
   {
   }
 
-  constexpr explicit bitfield(Enum value)
-      : value(static_cast<base_type>(value))
+  constexpr explicit bitfield(Enum a_value)
+      : value(static_cast<base_type>(a_value))
   {
   }
 
