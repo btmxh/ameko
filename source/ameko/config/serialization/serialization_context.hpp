@@ -150,8 +150,6 @@ inline auto serialize_load(const serialize_value& value, T& loaded_value)
   serialize_helper<remove_cv_t<T>>::load(value, loaded_value);
 }
 
-#pragma region serializers for common types
-
 template<typename NumType>
 struct serialize_helper<NumType, enable_if_t<is_arithmetic_v<NumType>>>
 {
@@ -251,6 +249,4 @@ struct serialize_helper<EnumType,
     loaded_value = convert::from_string(string_value);
   }
 };
-
-#pragma endregion serializers for common types
 }  // namespace ameko
