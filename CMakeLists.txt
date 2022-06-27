@@ -80,10 +80,6 @@ if(glad_FOUND)
   target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_GLAD)
 endif()
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  target_link_libraries(ameko_lib PUBLIC "stdc++fs")
-endif()
-
 # ---- Declare executable ----
 
 add_executable(ameko_exe source/main.cpp)
@@ -98,6 +94,11 @@ set_target_properties(
 target_compile_features(ameko_exe PRIVATE cxx_std_17)
 
 target_link_libraries(ameko_exe PRIVATE ameko_lib)
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  target_link_libraries(ameko_lib PUBLIC "stdc++fs")
+  target_link_libraries(ameko_exe PUBLIC "stdc++fs")
+endif()
 
 # ---- Install rules ----
 
