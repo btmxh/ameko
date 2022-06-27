@@ -49,6 +49,11 @@ auto dummy_display::set_vsync([[maybe_unused]] bool vsync) -> void
   m_vsync_flag = vsync;
 }
 
+auto dummy_display::close() -> void
+{
+  m_on_close_callback();
+}
+
 auto dummy_display::set_on_close(std::function<void()> callback) -> void
 {
   m_on_close_callback = std::move(callback);

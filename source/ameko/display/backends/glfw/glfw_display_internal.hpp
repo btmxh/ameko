@@ -39,6 +39,7 @@ public:
   auto unblock_poll_events() -> void;
   auto swap_buffers() -> void;
   auto set_vsync(bool vsync) -> void;
+  auto close() -> void;
   auto set_on_close(std::function<void()> callback) -> void;
 
   auto get_input_context() -> input_context&;

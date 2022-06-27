@@ -35,15 +35,14 @@ game::game()
 {
 }
 
-static auto set_terminate_handlers(const std::shared_ptr<executor>& exec_ptr)
+static auto set_terminate_handlers(const std::shared_ptr<display>& display_ptr)
 {
   // NOLINTNEXTLINE(*-avoid-non-const-global-variables)
-  static std::weak_ptr<executor> weak_executor = exec_ptr;
+  static std::weak_ptr<display> weak_display = display_ptr;
   auto signal_func = [](auto)
   {
-    if (auto shared_executor = weak_executor.lock(); shared_executor != nullptr)
-    {
-      shared_executor->stop();
+    if (auto display = weak_display.lock(); display != nullptr) {
+      display->close();
     }
   };
 
@@ -55,8 +54,6 @@ auto game::run() -> void
 {
   m_global_config.executor.default_vsync_mode = vsync_mode::automatic;
 
-  set_terminate_handlers(m_executor);
-
   executor_loops loops;
   loops.event = std::make_unique<event_loop>(m_display);
   loops.update = std::make_unique<update_loop>([] {});
@@ -66,6 +63,7 @@ auto game::run() -> void
   m_executor->start(std::move(loops));
   set_multi_thread_mode(*m_executor);
   m_display->set_on_close([&] { m_executor->stop(); });
+  set_terminate_handlers(m_display);
   m_display->set_visible(/*visible=*/true);
   m_executor->main_thread_run();
   m_executor->join();

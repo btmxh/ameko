@@ -26,6 +26,7 @@ public:
   virtual auto unblock_poll_events() -> void = 0;
   virtual auto swap_buffers() -> void = 0;
   virtual auto set_vsync(bool vsync) -> void = 0;
+  virtual auto close() -> void = 0;
   virtual auto set_on_close(std::function<void()> callback) -> void = 0;
 
   virtual auto get_input_context() -> input_context& = 0;

@@ -27,6 +27,7 @@ public:
   auto unblock_poll_events() -> void;
   auto swap_buffers() -> void;
   auto set_vsync([[maybe_unused]] bool vsync) -> void;
+  auto close() -> void;
 
   auto set_on_close(std::function<void()> callback) -> void;
 

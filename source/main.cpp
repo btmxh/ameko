@@ -17,7 +17,7 @@ static auto get_exception_message() noexcept
   }
 }
 
-static auto log_error() -> int
+static auto log_error() noexcept -> int
 {
   try {
     auto message = get_exception_message();

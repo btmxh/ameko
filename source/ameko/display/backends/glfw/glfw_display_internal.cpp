@@ -236,6 +236,11 @@ auto glfw_display::set_vsync(bool vsync) -> void
   }
 }
 
+auto glfw_display::close() -> void
+{
+  glfwSetWindowShouldClose(m_window.get(), GLFW_TRUE);
+}
+
 auto glfw_display::set_on_close(std::function<void()> callback) -> void
 {
   if (glfwWindowShouldClose(m_window.get()) != GLFW_FALSE) {

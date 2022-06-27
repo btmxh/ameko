@@ -102,11 +102,25 @@ auto executor::resume() -> void
 
 auto executor::stop() -> void
 {
+  if(!m_running)
+  // this makes sure that:
+  // * the opengl context is current on main thread
+  // (back to where it started)
+  // * no loops can block indefinitely 
+  // (since `single` is true for all these loops)
+  set_mode(executor_mode {{main_thread_id, 1.0},
+                          {main_thread_id, 1.0},
+                          {main_thread_id, 1.0},
+                          {main_thread_id, 1.0},
+                          {0.0, 0.0, 0.0, 0.0},
+                          vsync_mode::off});
+
   for (auto& thread : m_threads) {
     if (thread.has_value()) {
       thread->stop();
     }
   }
+
   m_running = false;
 }
 
