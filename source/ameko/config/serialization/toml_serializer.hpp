@@ -11,8 +11,8 @@ public:
 
   auto serialize(const serialize_value& value,
                  std::ostream& output,
-                 std::string_view output_path) -> void;
+                 std::string_view output_path) -> void override;
   auto deserialize(std::istream& input, std::string_view input_path)
-      -> serialize_value;
+      -> serialize_value override;
 };
 }  // namespace ameko

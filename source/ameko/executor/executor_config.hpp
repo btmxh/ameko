@@ -16,7 +16,7 @@ namespace ameko
 
 struct executor_loop_config
 {
-  executor_thread_id thread_id;
+  executor_thread_id thread_id = main_thread_id;
   optional<double> relative_frequency;
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
@@ -43,7 +43,8 @@ struct executor_mode_config
   executor_loop_config render;
   executor_loop_config audio;
 
-  std::array<double, max_num_executor_threads> executor_thread_frequencies;
+  std::array<double, max_num_executor_threads> executor_thread_frequencies {
+      0.0};
   optional<vsync_mode> vsync;
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
