@@ -113,9 +113,10 @@ glfw_display::glfw_display(display_config& display_config,
                 break;
             }
 
-            switch (value_or_assign(
-                display_config.mode,
-                static_cast<display_mode>(display_mode::AMEKO_DEFAULT_WINDOW_MODE)))
+            switch (
+                value_or_assign(display_config.mode,
+                                static_cast<display_mode>(
+                                    display_mode::AMEKO_DEFAULT_WINDOW_MODE)))
             {
               case display_mode::windowed: {
                 const auto& size = or_else_assign(
