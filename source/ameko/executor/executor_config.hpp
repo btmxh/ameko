@@ -49,10 +49,10 @@ struct executor_mode_config
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
     context(AMEKO_SERIALIZATION_NVP(display_name));
-    context(AMEKO_SERIALIZATION_NVP(event));
-    context(AMEKO_SERIALIZATION_NVP(update));
-    context(AMEKO_SERIALIZATION_NVP(render));
-    context(AMEKO_SERIALIZATION_NVP(audio));
+    context(AMEKO_SERIALIZATION_NVP(event), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(update), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(render), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(audio), /*optional=*/true);
 
     std::vector<double> thread_frequencies;
     if constexpr (remove_cvref_t<decltype(context)>::is_save) {
@@ -62,7 +62,7 @@ struct executor_mode_config
                 thread_frequencies.begin());
     }
 
-    context(AMEKO_SERIALIZATION_NVP(thread_frequencies));
+    context(AMEKO_SERIALIZATION_NVP(thread_frequencies), /*optional=*/true);
 
     if constexpr (remove_cvref_t<decltype(context)>::is_load) {
       for (size_t i = 0; i < executor_thread_frequencies.size(); ++i) {
@@ -78,13 +78,13 @@ struct executor_mode_config
 struct executor_config
 {
   std::vector<executor_mode_config> executor_modes;
-  vsync_mode default_vsync_mode;
+  vsync_mode default_vsync_mode = vsync_mode::automatic;
   size_t current_mode_index = 0;
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
     context(AMEKO_SERIALIZATION_NVP(executor_modes));
-    context(AMEKO_SERIALIZATION_NVP(default_vsync_mode));
-    context(AMEKO_SERIALIZATION_NVP(current_mode_index));
+    context(AMEKO_SERIALIZATION_NVP(default_vsync_mode), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(current_mode_index), /*optional=*/true);
   })
 };
 

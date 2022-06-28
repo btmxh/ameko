@@ -25,13 +25,13 @@ struct logger_config
 
 struct gl_logger_config : public logger_config
 {
-  bool log_debug_messenger;
-  std::vector<size_t> disabled_ids;
+  bool log_debug_messenger = false;
+  std::vector<size_t> disabled_ids {};
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
     base_serialize(context);
-    context(AMEKO_SERIALIZATION_NVP(log_debug_messenger));
-    context(AMEKO_SERIALIZATION_NVP(disabled_ids));
+    context(AMEKO_SERIALIZATION_NVP(log_debug_messenger), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(disabled_ids), /*optional=*/true);
   })
 };
 
@@ -42,9 +42,9 @@ struct logging_config
   logger_config ffmpeg;
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
-    context(AMEKO_SERIALIZATION_NVP(ameko));
-    context(AMEKO_SERIALIZATION_NVP(gl));
-    context(AMEKO_SERIALIZATION_NVP(ffmpeg));
+    context(AMEKO_SERIALIZATION_NVP(ameko), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(gl), /*optional=*/true);
+    context(AMEKO_SERIALIZATION_NVP(ffmpeg), /*optional=*/true);
   })
 };
 }  // namespace ameko
