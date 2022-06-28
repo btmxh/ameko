@@ -17,6 +17,7 @@ auto load_global_config(const std::filesystem::path& config_file)
   try {
     toml_serializer serializer;
     std::ifstream stream(config_file);
+    stream.exceptions(std::ios::failbit);
 
     auto config_file_path = config_file.string();
     auto serialized_value = serializer.deserialize(stream, config_file_path);
