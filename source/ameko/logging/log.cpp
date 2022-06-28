@@ -33,6 +33,7 @@ auto create_spdlog_logger(std::string_view logger_name)
 {
   auto logger = std::make_shared<spdlog::logger>(std::string(logger_name));
   spdlog::register_logger(logger);
+  logger->set_level(log_level::trace);
   return logger;
 }
 
