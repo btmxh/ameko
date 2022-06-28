@@ -13,7 +13,7 @@ dummy_display::dummy_display([[maybe_unused]] display_config& display_config,
     , m_vsync(std::make_unique<of_sync>())
 {
   auto current_graphics_backend =
-      value_or_assign(graphics_config.backend, graphics_backend::dummy);
+      graphics_config.backend.value_or(graphics_backend::dummy);
   if (current_graphics_backend != graphics_backend::dummy) {
     // TODO: add vulkan headless support
     throw std::runtime_error("unsupported graphics backend");

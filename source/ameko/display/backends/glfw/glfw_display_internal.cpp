@@ -99,8 +99,8 @@ glfw_display::glfw_display(display_config& display_config,
             std::string title = "ameko";
             glfwDefaultWindowHints();
             glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-            switch (value_or_assign(graphics_config.backend,
-                                    get_default_graphics_backend()))
+            switch (graphics_config.backend.value_or(
+                lazy_value_or {get_default_graphics_backend}))
             {
               case graphics_backend::opengl:
                 glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
@@ -113,10 +113,8 @@ glfw_display::glfw_display(display_config& display_config,
                 break;
             }
 
-            switch (
-                value_or_assign(display_config.mode,
-                                static_cast<display_mode>(
-                                    display_mode::AMEKO_DEFAULT_WINDOW_MODE)))
+            switch (value_or_assign(display_config.mode,
+                                    display_mode::AMEKO_DEFAULT_WINDOW_MODE))
             {
               case display_mode::windowed: {
                 const auto& size = or_else_assign(
@@ -180,8 +178,8 @@ glfw_display::glfw_display(display_config& display_config,
     , m_user_pointer(m_window.get())
     , m_input_context(m_window.get())
     , m_graphics_context(create_graphics_context(
-          value_or_assign(graphics_config.backend,
-                          get_default_graphics_backend()),
+          graphics_config.backend.value_or(
+              lazy_value_or {get_default_graphics_backend}),
           m_window.get()))
 {
   glfwSwapInterval(1);

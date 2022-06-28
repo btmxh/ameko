@@ -43,4 +43,14 @@ inline auto or_else_assign(optional<T>& opt, Func&& callback) -> T&
   return opt.value();
 }
 
+template<typename F>
+struct lazy_value_or
+{
+  F func;
+  operator decltype(auto)() const { return func(); }
+};
+
+template<typename F>
+lazy_value_or(F func) -> lazy_value_or<F>;
+
 }  // namespace ameko

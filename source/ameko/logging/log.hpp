@@ -70,8 +70,8 @@ inline auto log_debug(std::string_view logger_name,
 
 template<typename FormatStr, typename... Args>
 inline auto log_info(std::string_view logger_name,
-                      FormatStr&& format_string,
-                      Args&&... args)
+                     FormatStr&& format_string,
+                     Args&&... args)
 {
   log(logger_name,
       log_level::info,

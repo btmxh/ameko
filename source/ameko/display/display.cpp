@@ -20,8 +20,9 @@ auto create_display([[maybe_unused]] display_config& display_config,
                     [[maybe_unused]] graphics_config& graphics_config)
     -> std::unique_ptr<display>
 {
-  switch (
-      value_or_assign(display_config.backend, get_default_display_backend())) {
+  switch (display_config.backend.value_or(
+      lazy_value_or {get_default_display_backend}))
+  {
     case display_backend::glfw:
       if constexpr (deps::has_glfw) {
         return create_glfw_display(display_config, graphics_config);
