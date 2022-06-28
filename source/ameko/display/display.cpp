@@ -30,6 +30,8 @@ auto create_display([[maybe_unused]] display_config& display_config,
       }
     case display_backend::dummy:
       return std::make_unique<dummy_display>(display_config, graphics_config);
+    default:
+      throw std::runtime_error("unknown display backend");
   }
 }
 }  // namespace ameko
