@@ -109,7 +109,13 @@ auto toml_serializer::deserialize(std::istream& input,
                                   std::string_view input_path)
     -> serialize_value
 {
-  auto toml_data = toml::parse(input, input_path);
+  // we can't use the istream overload for toml::parse because
+  // that'll give an exception
+  // (the toml++ utf8_decoder reads in block of 32 bytes, which
+  // throws exceptions)
+  std::string content {std::istreambuf_iterator<char>(input),
+                       std::istreambuf_iterator<char>()};
+  auto toml_data = toml::parse(content, input_path);
   return toml_value_to_serialize_value(toml_data);
 }
 }  // namespace ameko
