@@ -47,12 +47,56 @@ inline auto log(std::string_view logger_name,
 }
 
 template<typename FormatStr, typename... Args>
-inline auto trace(std::string_view logger_name,
-                  FormatStr&& format_string,
-                  Args&&... args)
+inline auto log_trace(std::string_view logger_name,
+                      FormatStr&& format_string,
+                      Args&&... args)
 {
   log(logger_name,
       log_level::trace,
+      std::forward<FormatStr>(format_string),
+      std::forward<Args>(args)...);
+}
+
+template<typename FormatStr, typename... Args>
+inline auto log_debug(std::string_view logger_name,
+                      FormatStr&& format_string,
+                      Args&&... args)
+{
+  log(logger_name,
+      log_level::debug,
+      std::forward<FormatStr>(format_string),
+      std::forward<Args>(args)...);
+}
+
+template<typename FormatStr, typename... Args>
+inline auto log_warn(std::string_view logger_name,
+                     FormatStr&& format_string,
+                     Args&&... args)
+{
+  log(logger_name,
+      log_level::warn,
+      std::forward<FormatStr>(format_string),
+      std::forward<Args>(args)...);
+}
+
+template<typename FormatStr, typename... Args>
+inline auto log_error(std::string_view logger_name,
+                      FormatStr&& format_string,
+                      Args&&... args)
+{
+  log(logger_name,
+      log_level::err,
+      std::forward<FormatStr>(format_string),
+      std::forward<Args>(args)...);
+}
+
+template<typename FormatStr, typename... Args>
+inline auto log_critical(std::string_view logger_name,
+                         FormatStr&& format_string,
+                         Args&&... args)
+{
+  log(logger_name,
+      log_level::critical,
       std::forward<FormatStr>(format_string),
       std::forward<Args>(args)...);
 }

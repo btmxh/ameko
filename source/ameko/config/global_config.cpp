@@ -23,10 +23,10 @@ auto load_global_config(const std::filesystem::path& config_file)
     auto serialized_value = serializer.deserialize(stream, config_file_path);
     serialize_load<global_config>(serialized_value, config);
   } catch (std::exception& ex) {
-    trace(ameko_logger_name,
-          "unable to load config file from '{}': {}",
-          config_file.string(),
-          ex.what());
+    log_warn(ameko_logger_name,
+             "unable to load config file from '{}': {}",
+             config_file.string(),
+             ex.what());
   }
 
   return config;
@@ -42,10 +42,10 @@ auto save_global_config(global_config& config) -> void
     auto config_file_path = config.config_file.string();
     serializer.serialize(serialize_save(config), stream, config_file_path);
   } catch (std::exception& ex) {
-    trace(ameko_logger_name,
-          "unable to save config file to '{}': {}",
-          config.config_file.string(),
-          ex.what());
+    log_error(ameko_logger_name,
+              "unable to save config file to '{}': {}",
+              config.config_file.string(),
+              ex.what());
   }
 }
 
