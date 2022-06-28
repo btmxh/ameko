@@ -37,6 +37,7 @@ auto save_global_config(global_config& config) -> void
   try {
     toml_serializer serializer;
     std::ofstream stream(config.config_file);
+    stream.exceptions(std::ios::failbit);
 
     auto config_file_path = config.config_file.string();
     serializer.serialize(serialize_save(config), stream, config_file_path);
