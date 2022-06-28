@@ -65,7 +65,7 @@ static auto create_graphics_context(graphics_backend backend,
               // NOLINTNEXTLINE(*-reinterpret-cast)
               return reinterpret_cast<void*>(glfwGetProcAddress(name));
             },
-            [&](bool current)
+            [=](bool current)
             { glfwMakeContextCurrent(current ? window : nullptr); });
       } else {
         throw std::runtime_error("OpenGL graphics backend is unsupported");
