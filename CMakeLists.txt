@@ -80,6 +80,10 @@ if(glad_FOUND)
   target_compile_definitions(ameko_lib PUBLIC AMEKO_HAS_GLAD)
 endif()
 
+set(AMEKO_DEFAULT_WINDOW_MODE "borderless_fullscreen" CACHE STRING "self-explanatory")
+
+target_compile_definitions(ameko_lib PUBLIC AMEKO_DEFAULT_WINDOW_MODE=${AMEKO_DEFAULT_WINDOW_MODE})
+
 # ---- Declare executable ----
 
 add_executable(ameko_exe source/main.cpp)
