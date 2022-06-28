@@ -57,8 +57,4 @@ private:
 auto get_glfw_window_user_pointer(GLFWwindow* window)
     -> glfw_window_user_pointer&;
 
-inline auto x() {
-  return 1;
-}
-
 }  // namespace ameko

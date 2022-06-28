@@ -1,15 +1,15 @@
 #include <stdexcept>
 
-#include <ameko/display/backends/glfw/glfw_display_internal.hpp>
+#include "../../../dependencies/gl.hpp"
 
 #include <fmt/core.h>
 
-#include "../../../dependencies/gl.hpp"
 #include "../../../graphics/backends/dummy/dummy_graphics_context.hpp"
 #include "../../../graphics/backends/gl/gl_context.hpp"
 #include "../../../graphics/graphics_config.hpp"
 #include "../../../utils/optional.hpp"
 #include "glfw_context.hpp"
+#include "glfw_display_internal.hpp"
 
 namespace ameko
 {
