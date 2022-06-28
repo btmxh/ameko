@@ -19,7 +19,7 @@ struct glfw_window_user_pointer
   graphics_context* graphics_ctx = nullptr;
   std::function<void()> on_close = nullptr;
 
-  glfw_window_user_pointer(GLFWwindow* window);
+  explicit glfw_window_user_pointer(GLFWwindow* window);
 };
 
 class glfw_display : public display
@@ -27,23 +27,23 @@ class glfw_display : public display
 public:
   glfw_display(display_config& display_config,
                graphics_config& graphics_config);
-  ~glfw_display();
+  ~glfw_display() override;
 
   glfw_display(const glfw_display&) = delete;
   glfw_display(glfw_display&&) = delete;
   auto operator=(const glfw_display&) = delete;
   auto operator=(glfw_display&&) = delete;
 
-  auto set_visible(bool visible) -> void;
-  auto poll_events(bool block) -> void;
-  auto unblock_poll_events() -> void;
-  auto swap_buffers() -> void;
-  auto set_vsync(bool vsync) -> void;
-  auto close() -> void;
-  auto set_on_close(std::function<void()> callback) -> void;
+  auto set_visible(bool visible) -> void override;
+  auto poll_events(bool block) -> void override;
+  auto unblock_poll_events() -> void override;
+  auto swap_buffers() -> void override;
+  auto set_vsync(bool vsync) -> void override;
+  auto close() -> void override;
+  auto set_on_close(std::function<void()> callback) -> void override;
 
-  auto get_input_context() -> input_context&;
-  auto get_graphics_context() -> graphics_context&;
+  auto get_input_context() -> input_context& override;
+  auto get_graphics_context() -> graphics_context& override;
 
 private:
   glfw m_glfw;
@@ -56,5 +56,9 @@ private:
 
 auto get_glfw_window_user_pointer(GLFWwindow* window)
     -> glfw_window_user_pointer&;
+
+inline auto x() {
+  return 1;
+}
 
 }  // namespace ameko

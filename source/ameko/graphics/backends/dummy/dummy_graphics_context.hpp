@@ -8,7 +8,7 @@ class dummy_graphics_context : public graphics_context
 {
 public:
   dummy_graphics_context() = default;
-  ~dummy_graphics_context() = default;
+  ~dummy_graphics_context() override = default;
 
   dummy_graphics_context(const dummy_graphics_context&) = delete;
   dummy_graphics_context(dummy_graphics_context&&) = delete;

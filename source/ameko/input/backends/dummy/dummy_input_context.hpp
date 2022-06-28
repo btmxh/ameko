@@ -10,6 +10,11 @@ public:
   dummy_input_context() = default;
   ~dummy_input_context() override = default;
 
+  dummy_input_context(const dummy_input_context&) = delete;
+  dummy_input_context(dummy_input_context&&) = delete;
+  auto operator=(const dummy_input_context&) = delete;
+  auto operator=(dummy_input_context&&) = delete;
+
   auto set_key_callback(key_callback callback) -> void override;
   auto set_mouse_button_callback(mouse_button_callback callback)
       -> void override;

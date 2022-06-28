@@ -10,6 +10,11 @@ public:
   input_context() = default;
   virtual ~input_context() = default;
 
+  input_context(const input_context&) = default;
+  input_context(input_context&&) = default;
+  auto operator=(const input_context&) -> input_context& = default;
+  auto operator=(input_context&&) -> input_context& = default;
+
   virtual auto set_key_callback(key_callback callback) -> void = 0;
   virtual auto set_mouse_button_callback(mouse_button_callback callback)
       -> void = 0;

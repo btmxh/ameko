@@ -10,7 +10,6 @@ static const double dummy_refresh_rate = 60.0;
 dummy_display::dummy_display([[maybe_unused]] display_config& display_config,
                              graphics_config& graphics_config)
     : m_graphics_context(std::make_unique<dummy_graphics_context>())
-    , m_vsync_flag(true)
     , m_vsync(std::make_unique<of_sync>())
 {
   auto current_graphics_backend =

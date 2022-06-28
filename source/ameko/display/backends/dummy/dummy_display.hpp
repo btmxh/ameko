@@ -39,7 +39,7 @@ private:
   std::unique_ptr<graphics_context> m_graphics_context;
   dummy_input_context m_input_context;
   blocking_queue<int> m_event_queue;
-  bool m_vsync_flag;
+  bool m_vsync_flag {true};
   std::unique_ptr<sync> m_vsync;
 };
 }  // namespace ameko

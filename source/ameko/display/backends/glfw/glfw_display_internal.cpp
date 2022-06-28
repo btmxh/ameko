@@ -1,6 +1,6 @@
 #include <stdexcept>
 
-#include "glfw_display_internal.hpp"
+#include <ameko/display/backends/glfw/glfw_display_internal.hpp>
 
 #include <fmt/core.h>
 

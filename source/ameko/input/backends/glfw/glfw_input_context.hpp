@@ -8,8 +8,13 @@ namespace ameko
 class glfw_input_context : public input_context
 {
 public:
-  glfw_input_context(GLFWwindow* window);
-  ~glfw_input_context();
+  explicit glfw_input_context(GLFWwindow* window);
+  ~glfw_input_context() override;
+
+  glfw_input_context(const glfw_input_context&) = delete;
+  glfw_input_context(glfw_input_context&&) = delete;
+  auto operator=(const glfw_input_context&) = delete;
+  auto operator=(glfw_input_context&&) = delete;
 
   auto set_key_callback(key_callback callback) -> void override;
   auto set_mouse_button_callback(mouse_button_callback callback)
