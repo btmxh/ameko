@@ -7,6 +7,7 @@
 #include "../utils/enum.hpp"
 #include "../utils/optional.hpp"
 #include "../utils/rect.hpp"
+#include "display_backend.hpp"
 
 namespace ameko
 {
@@ -25,10 +26,12 @@ AMEKO_GENERATE_ENUM_STRING_CONVERTER(display_mode,
 
 struct display_config
 {
+  optional<display_backend> backend;
   optional<extent2z> size;
   optional<display_mode> mode;
 
   AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
+    context(AMEKO_SERIALIZATION_NVP(backend));
     context(AMEKO_SERIALIZATION_NVP(size));
     context(AMEKO_SERIALIZATION_NVP(mode));
   })
