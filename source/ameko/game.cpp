@@ -24,8 +24,7 @@ game::game()
     : m_global_config(
         [&]
         {
-          auto global_config =
-              load_global_config(R"(E:\dev\ameko\build\config.toml)");
+          auto global_config = load_global_config("config.toml");
           setup_loggers_from_config(global_config.logging);
           return global_config;
         }())
