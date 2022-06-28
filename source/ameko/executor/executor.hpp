@@ -50,7 +50,7 @@ private:
   std::array<optional<executor_thread>, max_num_executor_threads - 1>
       m_threads;  // main thread is omitted
   optional<executor_mode> m_mode;
-  std::atomic_bool m_running;
+  std::atomic_bool m_running {false};
   executor_loops m_loops;
 
   double m_relative_event_timer = 0.0;
