@@ -38,8 +38,16 @@ static auto set_terminate_handlers(const std::shared_ptr<display>& display_ptr)
 {
   // NOLINTNEXTLINE(*-avoid-non-const-global-variables)
   static std::weak_ptr<display> weak_display = display_ptr;
-  auto signal_func = [](auto)
+  auto signal_func = [](auto signal)
   {
+    auto signal_string = signal == SIGINT ? "SIGINT" : "SIGTERM";
+    log_info(ameko_logger_name,
+             "Signal {} was caught. The program will try to stop",
+             signal_string);
+    log_info(ameko_logger_name,
+             "If you wants to stop this program ungracefully, you need to use "
+             "SIGABRT or an alternative depending on your system. Both the "
+             "SIGTERM and SIGINT are handled as graceful termination requests");
     if (auto display = weak_display.lock(); display != nullptr) {
       display->close();
     }
