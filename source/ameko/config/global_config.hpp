@@ -19,12 +19,14 @@ struct global_config
   logging_config logging;
   executor_config executor;
 
-  AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
-    context(AMEKO_SERIALIZATION_NVP(display), /*optional=*/true);
-    context(AMEKO_SERIALIZATION_NVP(graphics), /*optional=*/true);
-    context(AMEKO_SERIALIZATION_NVP(logging), /*optional=*/true);
-    context(AMEKO_SERIALIZATION_NVP(executor), /*optional=*/true);
-  })
+  template<typename SerializationContext>
+  auto serialize(SerializationContext& context) -> void
+  {
+    context(AMEKO_SERIALIZATION_NVP(display));
+    context(AMEKO_SERIALIZATION_NVP(graphics));
+    context(AMEKO_SERIALIZATION_NVP(logging));
+    context(AMEKO_SERIALIZATION_NVP(executor));
+  }
 };
 
 auto load_global_config(const std::filesystem::path& config_file)

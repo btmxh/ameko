@@ -10,17 +10,8 @@
 #include "../../utils/type_traits.hpp"
 #include "serialize_value.hpp"
 
-// NOLINTBEGIN(*-macro-usage, *-macro-parentheses)
+// NOLINTNEXTLINE(*-macro-usage, *-macro-parentheses)
 #define AMEKO_SERIALIZATION_NVP(x) #x, x
-#define AMEKO_TWO_WAY_SERIALIZE_FUNC(context, func_content) \
-  AMEKO_TWO_WAY_SERIALIZE_FUNC_NAMED(serialize, context, func_content)
-#define AMEKO_TWO_WAY_SERIALIZE_FUNC_NAMED(func_name, context, func_content) \
-  template<typename SerializationContext> \
-  auto func_name(SerializationContext& context)->void \
-  { \
-    func_content \
-  }
-// NOLINTEND(*-macro-usage, *-macro-parentheses)
 
 namespace ameko
 {
@@ -42,7 +33,7 @@ struct save_serialization_context
   template<typename T>
   auto operator()(std::string_view name,
                   T& value,
-                  [[maybe_unused]] bool optional = false) -> void
+                  [[maybe_unused]] bool required = false) -> void
   {
     if constexpr (is_optional_v<T>) {
       if (value.has_value()) {
@@ -80,7 +71,7 @@ struct load_serialization_context
   template<typename T>
   auto operator()(std::string_view name,
                   T& value,
-                  [[maybe_unused]] bool optional = false) -> void
+                  [[maybe_unused]] bool required = false) -> void
   {
     if constexpr (is_optional_v<T>) {
       const auto* serialize_value = get(name);
@@ -92,7 +83,7 @@ struct load_serialization_context
     } else {
       const auto* serialize_value = get(name);
       if (serialize_value == nullptr) {
-        if (!optional) {
+        if (required) {
           throw std::runtime_error("missing property");
         }
 

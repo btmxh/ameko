@@ -30,10 +30,12 @@ struct display_config
   optional<extent2z> size;
   optional<display_mode> mode;
 
-  AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
+  template<typename SerializationContext>
+  auto serialize(SerializationContext& context) -> void
+  {
     context(AMEKO_SERIALIZATION_NVP(backend));
     context(AMEKO_SERIALIZATION_NVP(size));
     context(AMEKO_SERIALIZATION_NVP(mode));
-  })
+  }
 };
 }  // namespace ameko

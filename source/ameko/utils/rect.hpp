@@ -19,10 +19,12 @@ struct offset2
   {
   }
 
-  AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
-    context(AMEKO_SERIALIZATION_NVP(x));
-    context(AMEKO_SERIALIZATION_NVP(y));
-  })
+  template<typename SerializationContext>
+  auto serialize(SerializationContext& context) -> void
+  {
+    context(AMEKO_SERIALIZATION_NVP(x), /*required=*/true);
+    context(AMEKO_SERIALIZATION_NVP(y), /*required=*/true);
+  }
 };
 
 template<typename T>
@@ -39,10 +41,12 @@ struct extent2
   {
   }
 
-  AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
-    context(AMEKO_SERIALIZATION_NVP(width));
-    context(AMEKO_SERIALIZATION_NVP(height));
-  })
+  template<typename SerializationContext>
+  auto serialize(SerializationContext& context) -> void
+  {
+    context(AMEKO_SERIALIZATION_NVP(width), /*required=*/true);
+    context(AMEKO_SERIALIZATION_NVP(height), /*required=*/true);
+  }
 
   [[nodiscard]] auto area() const -> decltype(auto) { return width * height; }
 };
@@ -87,10 +91,12 @@ struct rect
   auto max_y() const -> T { return offset.y + extent.height; }
   auto center_y() const -> T { return offset.y + extent.height / 2; }
 
-  AMEKO_TWO_WAY_SERIALIZE_FUNC(context, {
-    context(AMEKO_SERIALIZATION_NVP(offset));
-    context(AMEKO_SERIALIZATION_NVP(extent));
-  })
+  template<typename SerializationContext>
+  auto serialize(SerializationContext& context) -> void
+  {
+    context(AMEKO_SERIALIZATION_NVP(offset), /*required=*/true);
+    context(AMEKO_SERIALIZATION_NVP(extent), /*required=*/true);
+  }
 };
 
 using offset2z = offset2<size_t>;
