@@ -47,6 +47,8 @@ template<typename F>
 struct lazy_value_or
 {
   F func;
+
+  // NOLINTNEXTLINE(*-explicit-constructor, *-explicit-conversions)
   operator decltype(auto)() const { return func(); }
 };
 
