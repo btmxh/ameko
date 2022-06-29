@@ -19,6 +19,7 @@ set(AMEKO_SOURCES
   source/ameko/game.cpp
   source/ameko/config/global_config.cpp
   source/ameko/config/serialization/toml_serializer.cpp
+  source/ameko/config/serialization/serialize_value.cpp
   source/ameko/executor/executor.cpp
   source/ameko/executor/threads/thread.cpp
   source/ameko/executor/loops/event_loop.cpp

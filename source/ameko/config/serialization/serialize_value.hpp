@@ -131,4 +131,7 @@ private:
       m_value;
 };
 
+auto is_empty_construct(const serialize_value& value) -> bool;
+auto remove_empty_constructs(serialize_value& value) -> void;
+
 }  // namespace ameko

@@ -40,7 +40,10 @@ auto save_global_config(global_config& config) -> void
     stream.exceptions(std::ios::failbit);
 
     auto config_file_path = config.config_file.string();
-    serializer.serialize(serialize_save(config), stream, config_file_path);
+    auto config_serialize_value = serialize_save(config);
+    remove_empty_constructs(config_serialize_value);
+
+    serializer.serialize(config_serialize_value, stream, config_file_path);
   } catch (std::exception& ex) {
     log_error(ameko_logger_name,
               "unable to save config file to '{}': {}",
