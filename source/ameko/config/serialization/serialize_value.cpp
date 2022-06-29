@@ -20,10 +20,10 @@ auto remove_empty_constructs(serialize_value& value) -> void
   if (value.is_object()) {
     auto& object = value.get_object();
     std::vector<const std::string*> remove_keys;
-    for (auto& [key, value] : object) {
-      remove_empty_constructs(value);
-      if (is_empty_construct(value)) {
-        remove_keys.push_back(&key);
+    for (auto& [pair_key, pair_value] : object) {
+      remove_empty_constructs(pair_value);
+      if (is_empty_construct(pair_value)) {
+        remove_keys.push_back(&pair_key);
       }
     }
 
