@@ -11,7 +11,6 @@
 
 namespace ameko
 {
-// NOLINTBEGIN(*-no-recursion)
 static auto toml_value_to_serialize_value(const toml::node& toml_value)
     -> serialize_value
 {
@@ -94,7 +93,6 @@ static auto serialize_value_to_toml_value(
 
   throw std::runtime_error("invalid serialize value");
 }
-// NOLINTEND(*-no-recursion)
 
 auto toml_serializer::serialize(const serialize_value& value,
                                 std::ostream& output,

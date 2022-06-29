@@ -9,6 +9,7 @@ Checks: "*,\
   -llvm-header-guard,\
   -llvm-include-order,\
   -llvmlibc-*,\
+  -*-no-recursion,\
   -misc-non-private-member-variables-in-classes"
 WarningsAsErrors: ''
 CheckOptions:
